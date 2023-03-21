@@ -50,7 +50,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        // $projects = Project::all();
+
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
