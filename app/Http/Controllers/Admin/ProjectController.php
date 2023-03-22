@@ -7,6 +7,9 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 
+// Helpers
+use Illuminate\Support\Str;
+
 class ProjectController extends Controller
 {
     /**
@@ -28,7 +31,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -39,7 +42,13 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $data['slug'] = Str::slug($data['title']);
+
+        $newProject = Project::create($data);
+
+        return redirect()->route('admin.projects.show', $newProject->id)->with('success', 'Progetto aggiunto con successo!');
     }
 
     /**
@@ -50,8 +59,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        // $projects = Project::all();
-
         return view('admin.projects.show', compact('project'));
     }
 

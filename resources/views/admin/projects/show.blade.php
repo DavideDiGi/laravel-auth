@@ -3,6 +3,11 @@
 @section('content')
 <div class="container-fluid mt-4">
     <div class="row justify-content-center">
+        @if (session('success'))
+            <div class="alert alert-success w-50 mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="col d-flex">
             <h2>{{ $project->id }}</h2>
             <h2 class="mx-1"> - </h2>
