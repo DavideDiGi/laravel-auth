@@ -13,6 +13,7 @@
         <div class="card-container">
             <a href="{{ route('admin.projects.create') }}" class="btn btn-success text-center mb-3">Aggiungi un nuovo progetto</a>
 
+            @include('partials.success')
 
             @foreach ($projects as $project)
                 
@@ -26,10 +27,18 @@
                         </div>
                         <p class="slug card-text"><small class="text-muted">{{ $project->slug }}</small></p>
                         <p class="content card-text">{{ $project->content }}</p>
-                        <div class="controls">
+                        <div class="controls d-flex justify-content-between">
                             <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-dark px-5">Vedi progetto</a>
-                            <a href="#" class="btn btn-danger float-end ms-2">Elimina</a>
-                            <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning float-end">Modifica</a>
+                            
+                            <div class="d-flex">
+                                <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning float-end">Modifica</a>
+                                <form class="" action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Sei sicuro di voler eliminare questo progetto?');">
+                                    
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger ms-2">Elimina</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
