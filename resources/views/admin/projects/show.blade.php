@@ -20,6 +20,11 @@
 
         <h5 class="title-slug">{{ $project->slug }}</h5>
         <p class="card-text fw-light">{{ $project->content }}</p>
+        @if ($project->cover)
+            <div>
+                <img src="{{ asset('storage/'.$project->cover) }}" style="300px" alt="">
+            </div>
+        @endif
         <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">Modifica</a>
         <a href="#" class="btn btn-danger">Elimina</a>
         <a href="{{ route('admin.projects.index') }}" class="btn btn-dark float-end">Torna indietro</a>
