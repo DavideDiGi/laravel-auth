@@ -20,9 +20,9 @@
 
         <h5 class="title-slug">{{ $project->slug }}</h5>
         <p class="card-text fw-light">{{ $project->content }}</p>
-        @if ($project->cover)
+        @if ($project->cover_pic)
             <div>
-                <img src="{{ asset('storage/'.$project->cover) }}" style="300px" alt="">
+                <img src="{{ asset('storage/'.$project->cover_pic) }}" style="300px" alt="">
             </div>
         @endif
         <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">Modifica</a>

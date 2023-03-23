@@ -28,8 +28,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="cover" class="form-label">Inserisci una copertina</label>
-                    <input type="file" class="form-control" id="cover" name="cover" accept="image/*"> 
+                    <label for="cover_pic" class="form-label">Inserisci una copertina</label>
+                    <input type="file" class="form-control" id="cover_pic" name="cover_pic" accept="image/*"> 
                 </div>
 
                 <div>

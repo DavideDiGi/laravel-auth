@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateProjectRequest;
 
 // Helpers
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -43,6 +44,11 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
+
+        if (array_key_exists('cover_img', $data)) {
+            $cover_img_path = Storage::put('projects', $data['cover_img']);
+            $data['cover_img'] = $cover_img_path;
+        }
 
         $data['slug'] = Str::slug($data['title']);
 
