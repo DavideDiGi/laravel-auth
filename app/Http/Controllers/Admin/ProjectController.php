@@ -70,7 +70,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -82,7 +82,20 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $data = $request->validated();
+
+        $oldTitle = $project->title;
+        $oldContent = $project->content;
+
+        $data['slug'] = Str::slug($data['title']);
+
+        $project->update($data);
+
+        if ($oldTitle == $project->title && $oldContent == $project->content) {
+            return redirect()->route('admin.projects.edit', $project->id)->with('success', 'Non hai modificato nessun dato');
+        } else {
+            return redirect()->route('admin.projects.show', $project->id)->with('success', 'Progetto modificato con successo!');
+        }
     }
 
     /**
