@@ -45,9 +45,11 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-        if (array_key_exists('cover_img', $data)) {
-            $cover_img_path = Storage::put('projects', $data['cover_img']);
-            $data['cover_img'] = $cover_img_path;
+
+
+        if (array_key_exists('cover_pic', $data)) {
+            $cover_pic_path = Storage::put('projects', $data['cover_pic']);
+            $data['cover_pic'] = $cover_pic_path;
         }
 
         $data['slug'] = Str::slug($data['title']);

@@ -21,8 +21,8 @@
         <h5 class="title-slug">{{ $project->slug }}</h5>
         <p class="card-text fw-light">{{ $project->content }}</p>
         @if ($project->cover_pic)
-            <div>
-                <img src="{{ asset('storage/'.$project->cover_pic) }}" style="300px" alt="">
+            <div class="pb-3">
+                <img src="{{ asset('storage/'.$project->cover_pic) }}" style="width: 250px;" alt="">
             </div>
         @endif
         <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">Modifica</a>

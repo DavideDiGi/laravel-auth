@@ -14,7 +14,7 @@
 
         <div class="col">
             
-            <form action="{{ route('admin.projects.store') }}" method="POST">
+            <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
                 <div class="mb-3">
