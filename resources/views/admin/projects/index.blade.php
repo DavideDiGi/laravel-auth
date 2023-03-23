@@ -33,6 +33,12 @@
 
                         <p class="content card-text">{{ $project->content }}</p>
 
+                        @if ($project->cover_pic)
+                            <div class="pb-3">
+                                <img src="{{ asset('storage/'.$project->cover_pic) }}" style="width: 250px;" alt="">
+                            </div>
+                        @endif
+
                         <div class="controls d-flex justify-content-between">
 
                             <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-dark px-5">Vedi progetto</a>

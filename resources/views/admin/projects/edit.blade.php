@@ -30,6 +30,11 @@
                     <textarea class="form-control" rows="5" id="content" name="content" required placeholder="Inserisci una descrizione...">{{ old('content', $project->content) }}</textarea>
                 </div>
 
+                <div class="mb-3">
+                    <label for="cover_pic" class="form-label">Copertina</label>
+                    <input type="file" class="form-control" id="cover_pic" name="cover_pic" accept="image/*"> 
+                </div>
+
                 <div>
                     <p class=" small fw-light text-secondary d-inline-block">i campi contrasegnati con <span>*</span> sono obbligatori</p>
                     <a href="{{ route('admin.projects.index') }}" class="btn btn-dark float-end">Torna indietro</a>
