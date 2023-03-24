@@ -45,8 +45,6 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-
-
         if (array_key_exists('cover_pic', $data)) {
             $cover_pic_path = Storage::put('projects', $data['cover_pic']);
             $data['cover_pic'] = $cover_pic_path;
@@ -90,16 +88,34 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+
         $data = $request->validated();
+
+        if (array_key_exists('delete_pic', $data)) {
+            if ($project->cover_pic) {
+                Storage::delete($project->cover_pic);
+
+                $project->cover_pic = null;
+                $project->save();
+            }
+        } else if (array_key_exists('cover_pic', $data)) {
+            $cover_pic_path = Storage::put('projects', $data['cover_pic']);
+            $data['cover_pic'] = $cover_pic_path;
+
+            if ($project->cover_pic) {
+                Storage::delete($project->cover_pic);
+            }
+        }
 
         $oldTitle = $project->title;
         $oldContent = $project->content;
+        $oldCover = $project->cover_pic;
 
         $data['slug'] = Str::slug($data['title']);
 
         $project->update($data);
 
-        if ($oldTitle == $project->title && $oldContent == $project->content) {
+        if ($oldTitle == $project->title && $oldContent == $project->content && $oldCover == $project->cover_pic) {
             return redirect()->route('admin.projects.edit', $project->id)->with('success', 'Non hai modificato nessun dato');
         } else {
             return redirect()->route('admin.projects.show', $project->id)->with('success', 'Progetto modificato con successo!');
@@ -114,6 +130,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->cover_pic) {
+            Storage::delete($project->cover_pic);
+        }
+
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('success', 'Progetto eliminato!');

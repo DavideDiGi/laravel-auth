@@ -16,7 +16,7 @@
 
         <div class="col">
             
-            <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
+            <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -30,11 +30,21 @@
                     <textarea class="form-control" rows="5" id="content" name="content" required placeholder="Inserisci una descrizione...">{{ old('content', $project->content) }}</textarea>
                 </div>
 
+                
                 <div class="mb-3">
                     <label for="cover_pic" class="form-label">Copertina</label>
+                    @if ($project->cover_pic)
+                    <div class="pb-3">
+                        <img src="{{ asset('storage/'.$project->cover_pic) }}" style="width: 250px;" alt="">
+                    </div>
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" name="delete_pic" id="delete_pic">
+                        <label for="delete_pic" class="form-check-label">Elimina copertina</label>
+                    </div>
+                    @endif
                     <input type="file" class="form-control" id="cover_pic" name="cover_pic" accept="image/*"> 
                 </div>
-
+                
                 <div>
                     <p class=" small fw-light text-secondary d-inline-block">i campi contrasegnati con <span>*</span> sono obbligatori</p>
                     <a href="{{ route('admin.projects.index') }}" class="btn btn-dark float-end">Torna indietro</a>

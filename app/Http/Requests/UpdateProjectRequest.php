@@ -31,7 +31,9 @@ class UpdateProjectRequest extends FormRequest
                 'required',
                 Rule::unique('projects')->ignore($this->project->id)
             ],
-            'content' => 'required'
+            'content' => 'required',
+            'cover_pic' => 'nullable|image|max:8192',
+            'delete_pic' => 'nullable'
         ];
     }
 }
